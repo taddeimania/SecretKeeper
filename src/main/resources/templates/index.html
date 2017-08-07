@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <title>Title</title>
 </head>
-<name>
+<body>
     <h1>What are your secrets?</h1>
     <form th:action="@{/createSecret}" method="post" th:object="${newSecret}">
-        <textarea th:field="*{name}" rows="5" cols="65"></textarea>
+        <textarea th:field="*{body}" rows="5" cols="65"></textarea>
         <input type="submit" value="Add Secret" />
     </form>
 
     <ul>
-        <li th:each="secret : ${secrets}" th:text="${secret.name}"></li>
+        <li th:each="secret : ${secrets}" th:text="${secret.body}"></li>
     </ul>
-</name>
+</body>
 </html>
