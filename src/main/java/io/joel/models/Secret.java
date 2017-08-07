@@ -1,9 +1,6 @@
 package io.joel.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Secret {
@@ -12,6 +9,10 @@ public class Secret {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String body;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public long getId() {
         return id;
@@ -27,5 +28,13 @@ public class Secret {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

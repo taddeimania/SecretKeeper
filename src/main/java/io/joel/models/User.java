@@ -20,6 +20,9 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Secret> secrets;
+
     @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;
