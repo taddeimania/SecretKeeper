@@ -6,5 +6,13 @@
 </head>
 <body>
     <h1>What are your secrets?</h1>
+    <form th:action="@{/createSecret}" method="post" th:object="${newSecret}">
+        <textarea th:field="*{body}" rows="5" cols="65"></textarea>
+        <input type="submit" value="Add Secret" />
+    </form>
+
+    <ul>
+        <li th:each="secret : ${secrets}" th:text="${secret.body}"></li>
+    </ul>
 </body>
 </html>
