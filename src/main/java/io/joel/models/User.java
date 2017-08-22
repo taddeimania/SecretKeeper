@@ -19,6 +19,7 @@ public class User implements UserDetails {
 
     private String username;
     private String password;
+    private boolean active;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Secret> secrets;
@@ -84,5 +85,13 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
