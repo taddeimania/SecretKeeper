@@ -1,6 +1,9 @@
 package io.joel.controllers;
 
+import io.joel.models.Role;
 import io.joel.models.User;
+import io.joel.repositories.RoleRepository;
+import io.joel.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    RoleRepository roleRepo;
+
+    @Autowired
+    UserRepository userRepo;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -42,8 +51,10 @@ public class LoginController {
         user.setUsername(username);
         String encryptedPassword = bCryptPasswordEncoder.encode(password);
         user.setPassword(encryptedPassword);
-        // Step 5: Set the user role on the user instance
-        // Step 6: Save user to the database!
+        Role userRole = roleRepo.findByName("ROLE_USER");
+        user.setRole(userRole);
+        user.setActive(true);
+        userRepo.save(user);
         return "redirect:/login";
     }
 }
