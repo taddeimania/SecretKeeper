@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
-</head>
+<!--Debt: make includes all come from same place-->
+<head th:include="login :: indexHead"></head>
 <body>
-    <h1>What are your secrets?</h1>
+    <!--Debt: wrap nav in div so we can have consistent color-->
+    <nav class="purple lighten-3" th:fragment="navbar">
+        <div class="nav-wrapper container">
+            <a th:href="@{/}" class="brand-logo">SECRETSSSSSS</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a th:href="@{/secret/createSecret}">Create Secret</a></li>
+                <li><a th:href="@{/secret/mySecrets}">My Secrets</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
 
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="LOGOUT!!!!" />
-    </form>
+        <div class="row">
+            <div class="col s12 m4" th:each="secret : ${secrets}">
+                <div class="card-panel purple">
+                    <span class="white-text" th:text="${secret.body}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:include="login :: scripts"></div>
 
-    <form th:action="@{/createSecret}" method="post" th:object="${newSecret}">
-        <textarea th:field="*{body}" rows="5" cols="65"></textarea>
-        <input type="submit" value="Add Secret" />
-    </form>
-
-    <ul>
-        <li th:each="secret : ${secrets}" th:text="${secret.body}"></li>
-    </ul>
 </body>
 </html>
