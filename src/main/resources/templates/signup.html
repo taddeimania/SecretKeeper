@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="indexHead">
+    <meta charset="UTF-8" />
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/materialize/0.98.2/dist/css/materialize.min.css}" />
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Signup FOOL!</h1>
+    <div style="color: red;" th:text="${error}"></div>
+    <form th:action="@{/signup}" th:object="${user}" method="post">
+        <input type="text" th:field="*{username}" placeholder="Username"/>
+        <input type="password" th:field="*{password}" placeholder="Password"/>
+        <button class="waves-effect waves-light btn" type="submit">Signup!</button>
+
+    </form>
+</div>
+
+<div th:fragment="scripts">
+    <script th:src="@{/webjars/jquery/3.2.1/dist/jquery.min.js}" type="application/javascript"></script>
+    <script th:src="@{/webjars/materialize/0.98.2/dist/js/materialize.min.js}"></script>
+</div>
+
+</body>
+</html>
